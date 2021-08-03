@@ -1,0 +1,13 @@
+<div class="container-fluid p-4  searchContainer">
+<form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+  <label for="user-name" class="userName">Search Repositories with User Name : </label>
+  <div class="row">
+      <div class="col-12 col-md-3 pr-0">
+        <input id="user-name" type="text" class="form-control " formControlName="userName">        
+      </div>
+      <button class="btn btn-bd-primary ml-3 mt-md-0 mt-2" [disabled]="!userForm.valid" >Get Repo</button>
+
+</div>
+</form>
+
+</div>

@@ -1,0 +1,91 @@
+
+<div class="container-fluid p-3" *ngIf="userName">
+    <div class="row">
+       <div class="col-md-11 col-7">
+        <h1>Repositories List</h1>
+       </div> 
+       <div class="col-md-1 col-5 text-center">
+        <img [src]= "avatar_url" class="avatar img-fluid" alt="">
+        <p>{{displayName}}</p>
+       </div> 
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Repository">
+              </mat-form-field>
+              
+              <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8">
+     
+                <ng-container matColumnDef="owner">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Owner  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.owner.login}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Name  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+              
+                <ng-container matColumnDef="description" >
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+                  <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="stargazers_count" >
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Stars </th>
+                    <td mat-cell *matCellDef="let element"> {{element.stargazers_count}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="open_issues_count" >
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Open issue count </th>
+                    <td mat-cell *matCellDef="let element"> {{element.open_issues_count}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="watchers" >
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Watchers </th>
+                    <td mat-cell *matCellDef="let element"> {{element.watchers}} </td>
+                  </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+              <!-- <mat-paginator [pageSizeOptions]="[2, 10, 20]" showFirstLastButtons></mat-paginator> -->
+              <mat-paginator *ngIf="dataSource?.data.length !== 0" [pageSizeOptions]="[2, 5, 7, 10]" ></mat-paginator>
+
+              <div *ngIf="dataSource?.data.length === 0" class="p-4 text-center">
+                No Records Found!
+                </div>
+        <!-- <table class="table table-striped" >
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Owner</th>
+              <th scope="col">Name</th>
+              <th scope="col">Description </th>
+              <th scope="col">Stars </th>
+              <th scope="col">Open issue count </th>
+              <th scope="col">Watchers </th>
+            </tr>
+            </thead>
+            <tbody *ngIf = "repoList !== ''">
+            <tr *ngFor="let repo of repoList; index as i">
+              <th scope="row">{{ i + 1 }}</th>
+              <td>{{repo?.owner.login}}</td>
+              <td> {{repo.name}}</td>
+              <td> {{repo.description}}</td>
+              <td>{{ repo.stargazers_count }}</td>
+              <td>{{ repo.open_issues_count  }}</td>
+              <td>{{ repo.watchers }}</td>
+            </tr>
+            </tbody>
+
+            <tbody *ngIf = "repoList == ''" class=" text-center">
+                <tr><td colspan="7" class="p-5">No Data Found</td></tr>
+            </tbody>
+          </table> -->
+        </div>
+    </div>
+</div>
+
